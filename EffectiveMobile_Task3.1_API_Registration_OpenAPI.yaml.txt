@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Book Store Registration API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /api/v1/users/register:
+    post:
+      summary: Register a new user
+      description: Registers a user after validating input and CAPTCHA; enforces unique username and password policy.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+                - username
+                - password
+                - captchaToken
+              properties:
+                firstName:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                lastName:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                  pattern: '^[a-zA-Z0-9._]+$'
+                password:
+                  type: string
+                  minLength: 8
+                  description: Must contain uppercase, lowercase, digit, special character and at least one non-alphabetic char.
+                captchaToken:
+                  type: string
+                  minLength: 1
+            examples:
+              valid:
+                summary: Valid registration
+                value:
+                  firstName: Sam
+                  lastName: Smith
+                  username: sam.smith
+                  password: Str0ng!Pass
+                  captchaToken: captcha-token
+      responses:
+        '200':
+          description: Registration succeeded
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                  - userId
+                  - username
+                  - createdAt
+                properties:
+                  message:
+                    type: string
+                    example: Your registration was successful
+                  userId:
+                    type: string
+                    format: uuid
+                  username:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+        '400':
+          description: Validation error (missing fields, invalid password, unchecked CAPTCHA)
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+              examples:
+                missingCaptcha:
+                  summary: CAPTCHA not checked
+                  value:
+                    message: Please verify captcha to register
+                weakPassword:
+                  summary: Password policy violation
+                  value:
+                    message: Password must have at least one non-alphabetic character, one digit (0-9), one uppercase (A-Z), one lowercase (a-z), one special character and Password must be eight characters or longer.
+                invalidUsername:
+                  summary: Username format invalid
+                  value:
+                    message: Invalid username
+                missingFields:
+                  summary: Required fields missing
+                  value:
+                    message: Required fields are missing or empty
+        '409':
+          description: Username already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: User exists!
+        '422':
+          description: CAPTCHA rejected by verification provider
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: CAPTCHA failed
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
