@@ -6,16 +6,16 @@
 ## 📂 Структура репозитория
 
 ### Task 1 — Process Model (Support)
-- `EffectiveMobile_Task1_ProcessModel_Support_AsIs.svg` — BPMN‑модель процесса поддержки «как есть».
-- `EffectiveMobile_Task1_TextVsModel_Analysis.docx` — комментарий с выявленными противоречиями между текстом и моделью.
+- `Task1_ProcessModel_Support_AsIs.svg` — BPMN‑модель процесса поддержки «как есть».
+- `Task1_TextVsModel_Analysis.docx` — комментарий с выявленными противоречиями между текстом и моделью.
 
 ### Task 2 — Publish Product Feature
-- `EffectiveMobile_Task2_UserStory_UseCase_PublishProduct.docx` — User Story и Use Case для функции публикации товара.
-- `EffectiveMobile_Task2_ProcessModel_PublishProduct.svg` — BPMN‑диаграмма процесса публикации товара.
+- `Task2_UserStory_UseCase_PublishProduct.docx` — User Story и Use Case для функции публикации товара.
+- `Task2_ProcessModel_PublishProduct.svg` — BPMN‑диаграмма процесса публикации товара.
 
 ### Task 3 — Registration API
-- `EffectiveMobile_Task3.1_API_Registration_OpenAPI.yaml` — OpenAPI спецификация для регистрации пользователя.
-- `EffectiveMobile_Task3.2_RegistrationAlgorithm_Backend.docx` — алгоритм регистрации на стороне backend‑сервиса.
+- `Task3.1_API_Registration_OpenAPI.yaml` — OpenAPI спецификация для регистрации пользователя.
+- `Task3.2_RegistrationAlgorithm_Backend.docx` — алгоритм регистрации на стороне backend‑сервиса.
 
 ## 📝 Особенности исходного задания
 - Формулировки местами перегружены длинными предложениями, что усложняет восприятие.  
